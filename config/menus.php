@@ -10,4 +10,5 @@ function my_theme_register_menus() {
         'footer'  => __('Footer Menu', 'tema'),
     ));
 }
+
 add_action('after_setup_theme', 'my_theme_register_menus');

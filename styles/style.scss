@@ -1,0 +1,33 @@
+// header 
+
+.header {
+    background-color: var(--main);
+
+    .custom-logo {
+        max-width: 120px;
+        height: auto;
+    }
+
+    nav {
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        ul {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            gap: 20px;
+            width: 100%;
+        }
+
+        a{
+            color: var(--bright-text);
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
