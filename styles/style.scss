@@ -31,3 +31,29 @@
         }
     }
 }
+
+.banner {
+    &-image {
+        &-desktop, &-mobile {
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        &-desktop {
+            display: block;
+            
+            @media (max-width: 568px) {
+                display: none;
+            }
+        }
+
+        &-mobile {
+            display: none;
+
+            @media (max-width: 568px) {
+                display: block;
+            }
+        }
+    }
+}
