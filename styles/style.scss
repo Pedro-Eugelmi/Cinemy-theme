@@ -3,11 +3,6 @@
 .header {
     background-color: var(--main);
 
-    .custom-logo {
-        max-width: 120px;
-        height: auto;
-    }
-
     nav {
         height: 100%;
         display: flex;
@@ -32,6 +27,8 @@
     }
 }
 
+// Banner
+
 .banner {
     &-image {
         &-desktop, &-mobile {
@@ -53,6 +50,105 @@
 
             @media (max-width: 568px) {
                 display: block;
+            }
+        }
+    }
+}
+
+// Produtos 
+
+.products {
+    &-sessions {
+        margin-top: 20px;
+        display: flex;
+        gap: 5px;
+    }
+
+    &-session {
+        &-item {
+            border: 1px solid var(--secondary);
+            font-size: 18px;
+            padding: 5px;
+            display: inline-block;
+            border-radius: var(--radius);
+            transition: 0.3s;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            position: relative;
+            height: 40px;
+            overflow: hidden;
+
+            &-title, &-date {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                text-wrap: nowrap;
+                transition: 0.3s;
+            }
+
+            &-date {
+                transform: translate(-50%, -50%);
+                color: var(--secondary);
+            }
+
+            &-title {
+                transform: translate( -50%, 250%);
+                color: var(--bright-text);
+            }
+
+            &:hover {
+                background-color: var(--secondary);
+
+                .products-session-item-date {
+                    transform: translate( -50%, 250%);
+                }
+    
+                .products-session-item-title {
+                    transform: translate(-50%, -50%);
+                }
+            }
+
+        
+        }
+    }
+}
+
+// Single Movie 
+.single-movie {
+
+    &-title {
+        font-size: 32px;
+    }
+
+    &-thumbnail {
+        width: 100%;
+        height: auto;
+    }
+
+    &-info {
+        width: 100%;
+        background-color: var(--main);
+        border-radius: var(--radius);
+        padding: 40px;
+
+        &-title {
+            font-size: 24px;
+            color: var(--bright-text);
+        }
+
+        &-list {
+            color: var(--bright-text);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            strong {
+                font-weight: 400;
+            }
+
+            span {
+                font-weight: 300;
             }
         }
     }

@@ -1,4 +1,4 @@
-<?php $banners = get_field("banners"); ?>
+<?php $banners = get_field("banners", 7); ?>
 
 <main class="container-fluid">
     <div class="container">
