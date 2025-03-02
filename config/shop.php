@@ -44,13 +44,25 @@ add_action('woocommerce_before_shop_loop_item', function() {
 // Thumbnail 
 
 add_action('woocommerce_before_shop_loop_item_title', function() {
-    echo '<div class="thumbnail-wrapper">';
+    echo '<div class="thumbnail-wrapper">'; 
 }, 9);
+
+remove_action("woocommerce_before_shop_loop_item_title", "woocommerce_template_loop_product_thumbnail", 10);
+
+add_action("woocommerce_before_shop_loop_item_title", function() {
+    $thumbnail = get_the_post_thumbnail_url();
+
+    if (empty($thumbnail)) {
+        $thumbnail = get_the_post_thumbnail_url(get_field("filme")); 
+    }
+
+    echo '<img class="attachment-woocommerce_thumbnail" src="' . $thumbnail. '">';
+}, 11);
 
 add_action('woocommerce_before_shop_loop_item_title', function() {
     echo '</div>';
     echo '</a>';
-}, 10);
+}, 12);
 
 
 // Conteúdo do produto - loop
@@ -75,5 +87,18 @@ function cinemy_product_content() {
     <?php
 }
 
+// Single produto
+
+// Adiciona o container
+remove_action('woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
+
+add_action('woocommerce_before_main_content', function() {
+    echo '<div class="container">';
+}, 10);
+
+// Remove o breadcrumb
+remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
 
 
+// Remove sidebar
+remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);

@@ -153,3 +153,66 @@
         }
     }
 }
+
+// Single product 
+
+.single-product {
+    &-seats {
+        background-color: var(--main);
+        border-radius: var(--radius);
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+
+        &-item {
+            background-color: var(--secondary);
+            height: 30px;
+            width: 30px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.7;
+            }
+
+            &.active {
+                background-color: #E7CA28;
+            }
+
+            &.ocuppied {
+                background-color: #D9D9D9;
+            }
+        }
+    }
+
+    &-order {
+        background-color: var(--main);
+        border-radius: var(--radius);
+        height: 100%;
+        padding: 20px;
+
+        &-price {
+            color: var(--bright-text);
+
+            strong {
+                color: var(--secondary);
+            }
+        }
+
+        &-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--bright-text);
+        }
+
+        &-info {
+            font-weight: 300;
+            color: var(--bright-text);
+            margin-top: 20px;
+        }
+    }
+}
