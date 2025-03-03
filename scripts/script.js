@@ -42,4 +42,45 @@ const swiperBanner = new Swiper('.swiper-banner .swiper', {
       price = price * seatsIds.length;
       priceArea.text(price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
     });
+
+    $("#cinemy-order").on("submit", function(e) {
+      let seats = $("#seats").val();
+      let quantity = $("#quantity").val();
+      let sessionId = $(".single-product").attr("id");
+      sessionId = sessionId.replace("product-", "");
+
+
+      // Verifica se selecionou o assento
+      if (seats && quantity) {
+        // Verifica se o ID é válido
+        if (parseInt(sessionId) > 0) {
+          // Adiciona no carrinho
+          $.ajax({
+            url: wordpress.ajax_url,
+            type:'POST',
+            data: {
+              action: 'cinemy_purchase_tickets',
+              seats: seats,
+              quantity: quantity,
+              sessionId: parseInt(sessionId)
+            },            
+            success: function(response) {
+              if (response.sucess == false) {
+                alert("Houve um problema ao concluir sua compra. Por favor, tente novamente mais tarde.");
+                e.preventDefault(); // Não recarrega a página
+              }
+            },
+            error: function(xhr, status, error) {
+              console.error(error);
+            }
+          });
+        } else {
+          alert("Houve um problema ao concluir sua compra. Por favor, tente novamente mais tarde.");
+          e.preventDefault(); // Não recarrega a página
+        }
+      } else {
+        alert("Por favor, escolha os assentos");
+        e.preventDefault(); // Não recarrega a página
+      }
+    });
   }

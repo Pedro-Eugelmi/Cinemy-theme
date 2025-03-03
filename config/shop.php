@@ -102,3 +102,28 @@ remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
 
 // Remove sidebar
 remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
+
+// Comprar os tickets
+function cinemy_purchase_tickets() {
+    $seats = isset($_POST["seats"]) ? sanitize_text_field($_POST["seats"]) : '';
+    $quantity = isset($_POST["quantity"]) ? absint($_POST["quantity"]) : 0;
+    $session_id = isset($_POST["sessionId"]) ? absint($_POST["sessionId"]) : 0;
+
+    // Verifica se os dados estão preenchidos
+    if (!empty($seats) && !empty($quantity) && !empty($session_id)) {
+        // Adiciona ao carrinho
+        WC()->cart->add_to_cart($session_id, $quantity);
+
+        $message = "SUCESSO! \n Id da sessão: " . $session_id . "\n Quantidade: " . $quantity . "\n Seats: " . $seats;
+        wp_send_json_success($message);
+    } else {
+        $message = "Algo deu errado! \n Id da sessão: " . $session_id . "\n Quantidade: " . $quantity . "\n Seats: " . $seats;
+        wp_send_json_error($message);	
+    }
+
+    wp_die();
+}
+
+add_action('wp_ajax_cinemy_purchase_tickets', 'cinemy_purchase_tickets'); 
+add_action('wp_ajax_nopriv_cinemy_purchase_tickets', 'cinemy_purchase_tickets'); 
+

@@ -47,40 +47,67 @@ if ( post_password_required() ) {
 
 	<?php 
 	$seats = get_field("assentos", $sala->ID); ?>
-	<div class="row py-4">
-		<div class="col-8">
+	<div class="row py-5">
+		<div class="col-12 col-xl-8">
 			<div class="single-product-seats">
-				<table class="single-product-seats-table">
-					<tbody class="d-flex flex-column gap-2">
-						<?php 
-						$posX = (int)$seats['quantidade_x'];
-						$posY = (int)$seats['quantidade_y'];
-						for ($i = 0; $i < $posX; $i++ ): ?>
-							<tr class="d-flex gap-2">
-								<?php for ($j = 0; $j < $posY; $j++): ?>
-									<td id="<?php echo $i.'-'.$j ?>" class="single-product-seats-item">
-										<?php echo $i.'-'.$j ?>
-									</td>	
-								<?php endfor; ?>
-							</tr>
-						<?php endfor; ?>
-					</tbody>
-				</table>
+				<div class="single-product-seats-area">
+					<div class="d-flex justify-content-center">
+						<div class="single-product-seats-screen">
+							<span>TELA</span>
+						</div>
+					</div>
+
+					<table class="single-product-seats-table">
+						<tbody class="d-flex flex-column gap-2">
+							<?php 
+							$posX = (int)$seats['quantidade_x'];
+							$posY = (int)$seats['quantidade_y'];
+							for ($i = 0; $i < $posX; $i++ ): ?>
+								<tr class="d-flex gap-2">
+									<?php for ($j = 0; $j < $posY; $j++): ?>
+										<td id="<?php echo $i.'-'.$j ?>" class="single-product-seats-item">
+											<?php echo $i.'-'.$j ?>
+										</td>	
+									<?php endfor; ?>
+								</tr>
+							<?php endfor; ?>
+						</tbody>
+					</table>
+
+				</div>
+				<div class="single-product-seats-options">
+					<ul>
+						<li>
+							<div class="occupied"></div>
+							Ocupado
+						</li>
+
+						<li>
+							<div class="free"></div>
+							Livre
+						</li>
+
+						<li>
+							<div class="selected"></div>
+							Selecionado
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 
-		<div class="col-4">
+		<div class="col-12 col-xl-4 mt-5 mt-xl-0">
 			<div class="single-product-order">
 				<h1 class="single-product-order-title">Sala 01</h1>
 
 				<ul class="single-product-order-info">
 					<li>Filme: <?php echo $movie->post_title ?></li>
-					<li>Horário: <?php echo $horario ?></li>
+					<li>Horário: <?php echo  date('d M - H:i', strtotime($horario)) ?></li>
 				</ul>
 
 				<hr class="line bright my-4">
 
-				<form class="d-flex flex-column" action="">
+				<form id="cinemy-order" class="d-flex flex-column" method="post" action="<?php echo get_permalink(get_page_by_path("carrinho")) ?>">
 					<input type="hidden" name="seat" id="seats">
 					<input type="hidden" name="quantity" id="quantity">
 					<span class="single-product-order-price">Total: <strong class="price">R$ 00,00</strong></span>
